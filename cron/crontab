@@ -1,0 +1,14 @@
+# Supercronic crontab for Drupal cron events.
+#
+# Drupal's cron is disabled at the application level (DISABLE_DRUPAL_CRON=true in .env /
+# Doppler) so Drupal never self-triggers cron on page load.  This file drives
+# it externally instead, which is the correct approach for containerised deploys.
+#
+# The DRUPAL_CRON_INTERVAL env var lets you override the schedule at runtime without
+# rebuilding the image (supercronic re-reads the file on SIGHUP, but env-var
+# substitution is handled at startup by the shell wrapper below if needed).
+# Default: every 5 minutes.
+#
+# Format: standard 5-field cron  (min hour dom month dow)
+
+*/5 * * * * /usr/local/bin/drupal-cron-run
