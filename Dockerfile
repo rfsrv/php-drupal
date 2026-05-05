@@ -25,6 +25,9 @@ RUN phpaddmod imagick shmop sockets
 # Add Pear modules
 RUN pear install console_table
 
+# Xdebug for debugging
+RUN pecl install xdebug-3.1.6
+
 # Install supercronic (container-native cron daemon for the cron sidecar)
 RUN set -eux; \
     ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/'); \
